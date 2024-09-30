@@ -11,6 +11,7 @@
   </welcome-file-list>
   
 
+
   <context-param>
   	<param-name>MysqlDriver</param-name>
   	<param-value>com.mysql.cj.jdbc.Driver</param-value>
@@ -30,4 +31,5 @@
   	<param-name>MysqlPW</param-name>
   	<param-value>1234</param-value>
   </context-param>
+
 </web-app>

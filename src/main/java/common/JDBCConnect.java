@@ -10,10 +10,12 @@ import java.sql.Statement;
 import jakarta.servlet.ServletContext;
 
 public class JDBCConnect {
+
 	public Connection conn;
 	public Statement stmt;
 	public PreparedStatement pstmt;
 	public ResultSet rs;
+
 	
 	public JDBCConnect(ServletContext application) {
 		
