@@ -11,10 +11,10 @@ import jakarta.servlet.ServletContext;
 
 public class JDBCConnect {
 
-	private Connection conn;
-	private Statement stmt;
-	private PreparedStatement pstmt;
-	private ResultSet rs;
+	public Connection conn;
+	public Statement stmt;
+	public PreparedStatement pstmt;
+	public ResultSet rs;
 	
 	public JDBCConnect(ServletContext application) {
 		
