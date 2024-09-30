@@ -15,6 +15,7 @@ public class JDBCConnect {
 	public Statement stmt;
 	public PreparedStatement pstmt;
 	public ResultSet rs;
+
 	
 	public JDBCConnect(ServletContext application) {
 		
@@ -51,5 +52,4 @@ public class JDBCConnect {
 		
 		System.out.println("JDBC 자원 해제");
 	}
-
 }
