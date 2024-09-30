@@ -10,7 +10,6 @@ import java.sql.Statement;
 import jakarta.servlet.ServletContext;
 
 public class JDBCConnect {
-
 	private Connection conn;
 	private Statement stmt;
 	private PreparedStatement pstmt;
@@ -51,5 +50,4 @@ public class JDBCConnect {
 		
 		System.out.println("JDBC 자원 해제");
 	}
-
 }
