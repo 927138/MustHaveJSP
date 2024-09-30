@@ -10,22 +10,26 @@
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
   
+
+
   <context-param>
-  	<param-name>INIT_PARAM</param-name>
-  	<param-value>web.xml에 저장한 init params</param-value>
+  	<param-name>MysqlDriver</param-name>
+  	<param-value>com.mysql.cj.jdbc.Driver</param-value>
   </context-param>
   
-  <error-page>
-  	<error-code>404</error-code>
-  	<location>/ImplicitObjct/Exception.jsp</location>
-  </error-page>
-  <error-page>
-  	<error-code>405</error-code>
-  	<location>/ImplicitObjct/Exception.jsp</location>
-  </error-page>
-  <error-page>
-  	<error-code>500</error-code>
-  	<location>/ImplicitObjct/Exception.jsp</location>
-  </error-page>
+  <context-param>
+  	<param-name>MysqlURL</param-name>
+  	<param-value>jdbc:mysql://localhost:3306/test?useUnicode=true&amp;serverTimezone=Asia/Seoul</param-value>
+  </context-param>
   
+  <context-param>
+  	<param-name>MysqlUSER</param-name>
+  	<param-value>root</param-value>
+  </context-param>
+  
+  <context-param>
+  	<param-name>MysqlPW</param-name>
+  	<param-value>1234</param-value>
+  </context-param>
+
 </web-app>
