@@ -15,10 +15,10 @@ public class MemberDAO extends JDBCConnect {
 		
 		
 		try {
-			psmt = conn.prepareStatement(query);
-			psmt.setString(1, uid);
-			psmt.setString(2, upass);
-			rs = psmt.executeQuery();
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, uid);
+			pstmt.setString(2, upass);
+			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
 				dto.setId(rs.getNString("id"));
