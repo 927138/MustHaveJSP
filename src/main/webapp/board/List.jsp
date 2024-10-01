@@ -74,7 +74,7 @@
 %>
 			<tr align="center">
 				<td><%= virtualNum %></td>
-				<td align="left"> <a href="View.jsp?num=<%= dto.getNum() %>"><%= dto.getTitle() %></a>
+				<td align="left"> <a href="./View.jsp?num=<%= dto.getNum() %>"><%= dto.getTitle() %></a>
 				</td>
 				<td><%= dto.getId() %></td>
 				<td><%= dto.getVisitcount() %></td>
@@ -89,7 +89,7 @@
 <table border="1" width="90%">
 	<tr align="right">
 		<td>
-			<button type="button" onclick="location.herf='Write.jsp';">글쓰기</button>
+			<button type="button" onclick="location.href='./Write.jsp';">글쓰기</button>
 		</td>
 	</tr>
 </table>

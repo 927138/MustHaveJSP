@@ -71,4 +71,113 @@ public class BoardDAO extends JDBCConnect{
 		return boardList;
 	}
 	
+	public int insertWrite(BoardDTO dto) {
+		
+		int result = 0;
+		
+		try {
+			String query = ""
+					+ "insert into board(title, content, id, visitCount) "
+					+ "values (?, ?, ?, 0)";
+			
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, dto.getTitle());
+			pstmt.setString(2, dto.getContent());
+			pstmt.setString(3, dto.getId());
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("게시물 입력 중 예외발생");
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	public BoardDTO selectView(String num) {
+		BoardDTO dto = new BoardDTO();
+		
+		String query = ""
+				+ "select B.*, M.name from members M inner join board B "
+				+ "on M.id = B.id "
+				+ "where B.num = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, num);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				dto.setNum(rs.getString(1));
+				dto.setTitle(rs.getString(2));
+				dto.setContent(rs.getString(3));
+				dto.setId(rs.getString(4));
+				dto.setPostdate(rs.getDate(5));
+				dto.setVisitcount(rs.getString(6));
+				dto.setName(rs.getString(7));
+			}
+		}catch(Exception e) {
+			System.out.println("view error");
+			e.printStackTrace();
+		}
+		
+		return dto;
+	}
+	
+	public void updateVisitCount(String num) {
+		
+		String query = ""
+				+ "update board "
+				+ "set visitCount = visitCount + 1 "
+				+ "where num = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, num);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("visitCount error");
+			e.printStackTrace();
+		}
+	}
+	
+	public int updateEdit(BoardDTO dto) {
+		int result = 0;
+		
+		String query = ""
+				+ "update board "
+				+ "set title=?, content=? "
+				+ "where num=?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, dto.getTitle());
+			pstmt.setString(2, dto.getContent());
+			pstmt.setString(3, dto.getNum());
+			result = pstmt.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("board update error");
+		}
+		
+		return result;
+	}
+	
+	public int deletePost(BoardDTO dto) {
+		int result = 0;
+		
+		String query = ""
+				+ "DELETE FROM board WHERE num = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, dto.getNum());
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("board delete error");
+		}
+		
+		return result;
+	}
 }
