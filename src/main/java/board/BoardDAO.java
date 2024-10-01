@@ -71,6 +71,48 @@ public class BoardDAO extends JDBCConnect{
 		return boardList;
 	}
 	
+	public List<BoardDTO> selectPagingList(Map<String, Object> map){
+		List<BoardDTO> boardList = new LinkedList<>();
+		
+		
+		String query = ""
+				+ "select * from "
+				+ "	(select board.*, row_number() over(order by num desc) as rownum"
+				+ "		from board ";
+		
+		if(map.get("searchWord") != null) {
+			query += "where " + map.get("searchField")
+					+ " like '%" + map.get("searchWord") + "%' ";
+		}
+		query += ") B "
+				+ "where rownum between ? and ?";
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, map.get("start").toString());
+			pstmt.setString(2, map.get("end").toString());
+			rs = pstmt.executeQuery();
+			
+			
+			while(rs.next()) {
+				BoardDTO dto = new BoardDTO();
+				dto.setNum(rs.getString(1));
+				dto.setTitle(rs.getString(2));
+				dto.setContent(rs.getString(3));
+				dto.setId(rs.getString(4));
+				dto.setPostdate(rs.getDate(5));
+				dto.setVisitcount(rs.getString(6));
+				
+				boardList.add(dto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("pageing list select error");
+		}
+		
+		return boardList;
+	}
+	
 	public int insertWrite(BoardDTO dto) {
 		
 		int result = 0;
