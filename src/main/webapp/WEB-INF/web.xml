@@ -10,8 +10,27 @@
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
   
-
+  
+	<!-- servlet mapping -->
+	<servlet>
+		<servlet-name>HelloServlet</servlet-name>
+		<servlet-class>servlet.HelloServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>HelloServlet</servlet-name>
+		<url-pattern>/servlet/HelloServlet.do</url-pattern>
+	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>DirectServlet</servlet-name>
+		<servlet-class>servlet.DirectServletPrint</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DirectServlet</servlet-name>
+		<url-pattern>/servlet/DirectServletPrint.do</url-pattern>
+	</servlet-mapping>
+	
+	<!-- paging 변수 -->
 	<context-param>
 		<param-name>POSTS_PER_PAGE</param-name>
 		<param-value>10</param-value>
@@ -22,6 +41,7 @@
 	</context-param>
 
 
+	<!-- jdbc connect Mysql -->
 	<context-param>
 		<param-name>MysqlDriver</param-name>
 		<param-value>com.mysql.cj.jdbc.Driver</param-value>

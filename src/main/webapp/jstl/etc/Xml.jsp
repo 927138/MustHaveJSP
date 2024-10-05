@@ -26,7 +26,7 @@
 
 <h4>parsing2</h4>
 <table border="1">
-	<x:forEach select="$list/bookList/book" var="books">
+	<x:forEach select="$list/bookList/book" var="books">0
 		<tr>
 			<td><x:out select="$books/name"/></td>
 			<td><x:out select="$books/author"/></td>
