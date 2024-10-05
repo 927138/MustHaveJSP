@@ -26,7 +26,6 @@ public class JDBCConnect {
 			String url = application.getInitParameter("MysqlURL");
 			String user = application.getInitParameter("MysqlUSER");
 			String pw = application.getInitParameter("MysqlPW");
-			
 			conn = DriverManager.getConnection(url, user, pw);
 			
 			System.out.println("application init prams sucess");
