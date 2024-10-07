@@ -27,7 +27,7 @@ public class UploadProcess extends HttpServlet{
 			String savedFileName = FileUtils.renameFile(saveDirectory, originalFileName);
 			
 			insertMyFile(req, originalFileName, savedFileName);
-			resp.sendRedirect("FileList.jsp");
+			resp.sendRedirect("./FileList.jsp");
 		} catch (Exception e) {
 			e.printStackTrace();
 			req.setAttribute("errorMessage", "file upload error");

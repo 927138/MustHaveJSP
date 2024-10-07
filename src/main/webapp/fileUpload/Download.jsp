@@ -19,12 +19,12 @@
 	    
 	    // 한글 파일명 깨짐 방지
 	    String client = request.getHeader("User-Agent");
-	    // if (client.indexOf("WOW64") == -1) {
-	    //     originalFilename = new String(originalFilename.getBytes("UTF-8"), "ISO-8859-1");
-	    // }
-	    // else {
+	     if (client.indexOf("WOW64") == -1) {
+	         originalFilename = new String(originalFilename.getBytes("UTF-8"), "ISO-8859-1");
+	     }
+	     else {
 	        originalFilename = new String(originalFilename.getBytes("KSC5601"), "ISO-8859-1");
-	    // }
+	     }
 	   
 	    // 파일 다운로드용 응답 헤더 설정 
 	    response.reset();

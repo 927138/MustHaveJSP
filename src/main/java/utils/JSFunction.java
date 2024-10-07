@@ -1,8 +1,39 @@
 package utils;
 
+import java.io.PrintWriter;
+
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.jsp.JspWriter;
 
 public class JSFunction {
+	
+	public static void alertLocation(HttpServletResponse resp, String msg, String uri) {
+		try {
+			resp.setContentType("text/html;charset=UTF-8");
+			PrintWriter out = resp.getWriter();
+			String script = ""
+					+ "<script>"
+					+ "		alert("+msg+");"
+					+ "		location.href='"+ uri +"';"
+					+ "</script>";
+			out.write(script);
+		} catch (Exception e) {
+		}
+	}
+	
+	public static void alertBack(HttpServletResponse resp, String msg) {
+		try {
+			resp.setContentType("text/html;charset=UTF-8");
+			PrintWriter out = resp.getWriter();
+			String script = ""
+					+ "<script>"
+					+ "		alert("+msg+");"
+					+ "		history.back();"
+					+ "</script>";
+			out.write(script);
+		} catch (Exception e) {
+		}
+	}
 	
 	public static void alertLocation(String msg, String url, JspWriter out) {
 		try {
