@@ -14,6 +14,102 @@ public class MVCBoardDAO extends JDBCConnect{
 		super(application);
 	}
 	
+	// 게시글 데이터를 받아 DB에 저장되어 있던 내용을 갱신합니다(파일 업로드 지원).
+    public int updatePost(MVCBoardDTO dto) {
+        int result = 0;
+        try {
+            // 쿼리문 템플릿 준비
+            String query = "UPDATE mvcboard"
+                         + " SET title=?, name=?, content=?, ofile=?, sfile=? "
+                         + " WHERE idx=? and pass=?";
+
+            // 쿼리문 준비
+            
+            pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, dto.getTitle());
+            pstmt.setString(2, dto.getName());
+            pstmt.setString(3, dto.getContent());
+            pstmt.setString(4, dto.getOfile());
+            pstmt.setString(5, dto.getSfile());
+            pstmt.setInt(6, dto.getIdx());
+            pstmt.setString(7, dto.getPass());
+
+            // 쿼리문 실행
+            result = pstmt.executeUpdate();
+        }
+        catch (Exception e) {
+            System.out.println("게시물 수정 중 예외 발생");
+            e.printStackTrace();
+        }
+        return result;
+    }
+	
+	public boolean confirmPassword(String pass, String idx) {
+		boolean isCorr = true;
+		
+		String query = ""
+				+ "select count(*) from mvcboard "
+				+ "where idx=? and pass=?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, idx);
+			pstmt.setString(2, pass);
+			rs = pstmt.executeQuery();
+			rs.next();
+			
+			if(rs.getInt(1) == 0) {
+				isCorr = false;
+			}
+			
+		} catch (Exception e) {
+			isCorr = false;
+			System.out.println("confirm() sql Excpetion");
+			e.printStackTrace();
+		}
+		
+		return isCorr;
+	}
+	
+	
+	public int deleteBoard(String idx) {
+		int result = 0;
+		
+		String query = ""
+				+ "delete from mvcboard "
+				+ "where idx=?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, idx);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	public int boardDownloadOfCount(String idx) {
+		int result = 0;
+		
+		String query = ""
+				+ "update mvcboard "
+				+ "set downcount = downcount+1 "
+				+ "where idx=?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, idx);
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("MVCBoardDAO.boardDownloadOfCount() sql exception");
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 	public MVCBoardDTO selectView(String idx) {
 		MVCBoardDTO dto = new MVCBoardDTO();
 		

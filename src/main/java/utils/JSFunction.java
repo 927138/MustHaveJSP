@@ -13,7 +13,7 @@ public class JSFunction {
 			PrintWriter out = resp.getWriter();
 			String script = ""
 					+ "<script>"
-					+ "		alert("+msg+");"
+					+ "		alert('"+msg+"');"
 					+ "		location.href='"+ uri +"';"
 					+ "</script>";
 			out.write(script);
@@ -27,7 +27,7 @@ public class JSFunction {
 			PrintWriter out = resp.getWriter();
 			String script = ""
 					+ "<script>"
-					+ "		alert("+msg+");"
+					+ "		alert('"+msg+"');"
 					+ "		history.back();"
 					+ "</script>";
 			out.write(script);
