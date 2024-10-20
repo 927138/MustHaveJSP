@@ -11,6 +11,11 @@
   </welcome-file-list>
   
   
+  	<context-param>
+  		<param-name>CHAT_ADDR</param-name>
+  		<param-value>ws://localhost:8080/MustHaveJSP</param-value>
+  	</context-param>
+  
   
 	<!-- filter mapping -->
 	<filter>
